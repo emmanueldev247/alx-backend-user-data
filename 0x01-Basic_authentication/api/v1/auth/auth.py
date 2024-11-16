@@ -22,7 +22,6 @@ class Auth:
 
     def authorization_header(self, request=None) -> str:
         """public method"""
-        print(request)
         if not request or "Authorization" not in request.headers:
             return None
         return request.headers.get("Authorization")
