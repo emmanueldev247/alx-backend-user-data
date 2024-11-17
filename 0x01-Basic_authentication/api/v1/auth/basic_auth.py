@@ -82,6 +82,6 @@ class BasicAuth(Auth):
         if not user_cred:
             return None
 
-        user_obj = self.user_object_from_credentials(user_cred):
+        user_obj = self.user_object_from_credentials(user_cred)
         if not user_obj:
             return None
