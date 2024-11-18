@@ -3,3 +3,4 @@
 *main.py
 *.pyc
 __p*
+*.db
