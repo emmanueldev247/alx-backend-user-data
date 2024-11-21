@@ -44,6 +44,13 @@ class DB:
     def find_user_by(self, **kwargs) -> User:
         """Method that takes in arbitrary keyword arguments and
             returns the first row found in the users table
+
+        Args:
+            **kwargs: The fields to search for and their new values.
+
+        Raises:
+            InvalidRequestError: If any provided field is invalid.
+            NoResultFound: If no user is found with the given ID.
         """
         try:
             query = self._session.query(User).filter_by(**kwargs)
@@ -53,3 +60,27 @@ class DB:
         if not user:
             raise NoResultFound
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Method that update the user’s attributes as passed in args
+
+
+        Args:
+            user_id (int): The ID of the user to update.
+            **kwargs: The fields to update and their new values.
+
+        Raises:
+        ValueError: If any provided field is invalid.
+        """
+        user = self.find_user_by(id=user_id)
+
+        for key, value in kwargs.items():
+            if not hasattr(user, key):
+                raise ValueError
+
+            setattr(user, key, value)
+
+        self._session.commit()
+
+
+
