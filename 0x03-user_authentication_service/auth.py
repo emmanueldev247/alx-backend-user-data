@@ -3,6 +3,8 @@
 """
 
 import bcrypt
+
+
 def _hash_password(password: str) -> bytes:
     """Function to hash password
 
