@@ -150,7 +150,8 @@ class Auth:
             raise ValueError
 
         hash_pwd = _hash_password(password)
-        user.hashed_password = hash_pwd
-        user.reset_token = None
-
-        self._db._session.commit()
+        self._db.update_user(
+                user.id,
+                hashed_password=hash_pwd,
+                reset_token=None
+        )
