@@ -135,3 +135,22 @@ class Auth:
         user.reset_token = token
         self._db._session.commit()
         return token
+
+    def update_password(reset_token: str, password: str) -> None:
+        """Method to find user corresponding to the email and
+           update the password
+
+        Args:
+            reset_token (str): token to authenticate reset
+            password (str): new password
+        """
+        try:
+            user = self._db.find_user_by(reset-token=reset_token)
+        except NoResultFound:
+            raise ValueError
+
+        hash_pwd = _hash_password(password)
+        user.hashed_password = hash_pwd
+        user.reset_token = None
+
+        self._db._session.commit()
