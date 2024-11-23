@@ -117,4 +117,4 @@ class Auth:
             return
 
         if user:
-            user.id = None
+            user.session_id = None
