@@ -136,7 +136,7 @@ class Auth:
         self._db._session.commit()
         return token
 
-    def update_password(reset_token: str, password: str) -> None:
+    def update_password(self, reset_token: str, password: str) -> None:
         """Method to find user corresponding to the email and
            update the password
 
