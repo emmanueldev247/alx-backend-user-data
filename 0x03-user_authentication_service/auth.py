@@ -92,7 +92,7 @@ class Auth:
         """Method to find user by session ID
 
         Args:
-            session_id (str) session ID to use in query
+            session_id (str): session ID to use in query
 
         Return:
              the corresponding User or None if not found
@@ -100,9 +100,21 @@ class Auth:
         try:
             user = self._db.find_user_by(session_id=session_id)
         except NoResultFound:
-            return None
+            return
 
-        if not user:
-            return None
+        if user:
+            return user
 
-        return user
+    def destroy_session(self, user_id: int) -> None:
+        """Method to destroy a sessionby deleting the session ID
+
+        Args:
+            user_id (int): user ID for user to destroy session for
+        """
+        try:
+            user = self._db.find_user_by(id=user_id)
+        except NoResultFound:
+            return
+
+        if user:
+            user.id = None
